@@ -112,8 +112,8 @@ def parse_json_results(json_str):
     try:
         data = json.loads(json_str.split("**Overall Ranking**:")[0])
         df = pd.DataFrame(data)
-        columns_order = ["headline", "ctr_potential", "clarity", "emotional_pull", "curiosity", "persuasive_strength", "framework"]
-        df.columns = [col.title().replace("_", " ") for col in df.columns]  # Title case
+        df.columns = [col.title().replace("_", " ") for col in df.columns]
+        columns_order = ["Headline", "Ctr Potential", "Clarity", "Emotional Pull", "Curiosity", "Persuasive Strength", "Framework"]
         return df[columns_order]
     except Exception as e:
         st.error(f"Failed to parse GPT output: {e}")
