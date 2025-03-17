@@ -173,6 +173,7 @@ if submitted:
                             st.error(f"Error generating CTA suggestions: {e}")
 
                     with st.expander("📝 Full GPT Analysis"):
+        
     try:
         # Split into JSON and ranking
         json_part, *rest = result.split("**Overall Ranking**:")
