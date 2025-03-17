@@ -81,13 +81,12 @@ def build_prompt(headlines):
     return f"Please evaluate the following headlines:\n\n{headlines_block}"
 
 # GPT Prompt to Generate CTA Suggestions
-
 def build_cta_prompt(headline):
     return f"""
 You're a seasoned direct response copywriter.
 
 Given this high-performing headline:
-"{headline}"
+\"{headline}\"
 
 Generate:
 1. Three short **subheadlines or lead-ins** (1–2 lines max) that could follow this in an ad or landing page. These should support or expand on the headline's message.
@@ -172,15 +171,14 @@ if submitted:
                         except Exception as e:
                             st.error(f"Error generating CTA suggestions: {e}")
 
+                    # ✅ Correctly formatted full GPT analysis
                     with st.expander("📝 Full GPT Analysis"):
-        
-    try:
-        # Split into JSON and ranking
-        json_part, *rest = result.split("**Overall Ranking**:")
-        data = json.loads(json_part)
+                        try:
+                            json_part, *rest = result.split("**Overall Ranking**:")
+                            data = json.loads(json_part)
 
-        for item in data:
-            st.markdown(f"""\
+                            for item in data:
+                                st.markdown(f"""\
 **Headline:** \"{item['headline']}\"  
 - **Clarity**: {item['clarity']}/10  
 - **Emotional Pull**: {item['emotional_pull']}/10  
@@ -192,12 +190,12 @@ if submitted:
 ---
 """)
 
-        if rest:
-            st.markdown("**Overall Ranking:**")
-            st.markdown(rest[0].strip())
+                            if rest:
+                                st.markdown("**Overall Ranking:**")
+                                st.markdown(rest[0].strip())
 
-    except Exception as e:
-        st.error(f"Error displaying full GPT analysis: {e}")
+                        except Exception as e:
+                            st.error(f"Error displaying full GPT analysis: {e}")
 
             except Exception as e:
                 st.error(f"Error generating results: {e}")
