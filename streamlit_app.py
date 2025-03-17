@@ -7,7 +7,7 @@ import pandas as pd
 # Set your OpenAI API key securely
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
-st.set_page_config(page_title="Burgo's Headline Comparator", layout="centered", page_icon="🧠")
+st.set_page_config(page_title="Burgo's Headline Comparator", layout="centered", page_icon="🆚")
 st.title("🧠 Burgo's Headline Comparator Tool")
 
 # Introductory paragraph
