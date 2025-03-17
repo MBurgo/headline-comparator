@@ -173,7 +173,30 @@ if submitted:
                             st.error(f"Error generating CTA suggestions: {e}")
 
                     with st.expander("📝 Full GPT Analysis"):
-                        st.markdown(result)
+    try:
+        # Split into JSON and ranking
+        json_part, *rest = result.split("**Overall Ranking**:")
+        data = json.loads(json_part)
+
+        for item in data:
+            st.markdown(f"""\
+**Headline:** \"{item['headline']}\"  
+- **Clarity**: {item['clarity']}/10  
+- **Emotional Pull**: {item['emotional_pull']}/10  
+- **Curiosity**: {item['curiosity']}/10  
+- **Persuasive Strength**: {item['persuasive_strength']}/10  
+- **CTR Potential**: {item['ctr_potential']}/10  
+- **Framework**: {item['framework']}  
+- **Explanation**: {item['explanation']}
+---
+""")
+
+        if rest:
+            st.markdown("**Overall Ranking:**")
+            st.markdown(rest[0].strip())
+
+    except Exception as e:
+        st.error(f"Error displaying full GPT analysis: {e}")
 
             except Exception as e:
                 st.error(f"Error generating results: {e}")
